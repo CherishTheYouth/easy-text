@@ -1,0 +1,28 @@
+{
+  "name": "easy-text",
+  "displayName": "Easy text",
+  "version": "0.0.1",
+  "description": "A Chrome Extension For Easy Input Text Which You Preset.",
+  "author": "CherishTheYouth<cherishtheyouth@qq.com>",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "plasmo": "0.84.0",
+    "vue": "3.3.8"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@types/chrome": "0.0.251",
+    "@types/node": "20.9.0",
+    "prettier": "3.0.3",
+    "typescript": "5.2.2"
+  },
+  "manifest": {
+    "host_permissions": [
+      "https://*/*"
+    ]
+  }
+}
