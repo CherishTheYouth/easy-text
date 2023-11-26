@@ -28,11 +28,12 @@
 </template>
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue"
-import type { App } from "vue"
+import type { App, Ref } from "vue"
 import { ElButton, ElCard, ElRow, ElCol, ElTabPane, ElTabs, ElForm, ElFormItem, ElInput, ElTable, ElTableColumn, ElNotification } from 'element-plus'
 import 'element-plus/dist/index.css'
 import { cloneDeep } from 'lodash-unified'
 import { Storage } from '@plasmohq/storage'
+import type { Template } from './Types.ts'
 
 defineOptions({
   prepare(app: App) {
@@ -41,12 +42,12 @@ defineOptions({
   }
 })
 
-const state = reactive({
+const state: Template = reactive({
   name: '',
   content: ''
 })
 
-const templateList = ref([])
+const templateList: Ref<Array<Template>> = ref([])
 const storage = new Storage({
   area: "local"
 })
@@ -62,8 +63,7 @@ const createTemplate = async () => {
 onMounted(async () => {
   const storedTemplates = await storage.get('easy-text')
   if (storedTemplates) {
-    templateList.value = storedTemplates as unknown as []
-    console.log('storedTemplates', storedTemplates)
+    templateList.value = storedTemplates as unknown as Array<Template>
   }
 })
 </script>

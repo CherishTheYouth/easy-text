@@ -10,10 +10,9 @@ const storage = new Storage({
 
 chrome.runtime.onInstalled.addListener(async () => {
   const storedTemplates = await storage.get('easy-text') as unknown as [Template]
-  console.log('chrome', chrome, storedTemplates)
   if (storedTemplates) {
     forEach(storedTemplates, (template: Template) => {
-      const { name, content } = template
+      const { name } = template
       chrome.contextMenus.create({
         id: name,
         title: name,
@@ -40,7 +39,6 @@ storage.watch({
 
 // Open a new search tab when the user clicks a context menu
 chrome.contextMenus.onClicked.addListener(async (item, tab) => {
-  console.log('item', item, tab)
   const storedTemplates = await storage.get('easy-text')
   if (storedTemplates) {
     const message = find(storedTemplates, (template) => template.name === item.menuItemId)?.content
