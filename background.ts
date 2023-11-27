@@ -1,6 +1,6 @@
 import { Storage } from "@plasmohq/storage"
 import type { Template } from './Types'
-import { forEach, find } from 'lodash-unified'
+import { forEach, find, isEmpty } from 'lodash-unified'
 
 export {}
 
@@ -23,8 +23,20 @@ chrome.runtime.onInstalled.addListener(async () => {
   }
 });
 
+/**
+ * chrome.contextMenus
+ * functions:
+ * create
+ * remove
+ * removeAll
+ * update
+*/
 storage.watch({
   'easy-text': (s) => {
+    chrome.contextMenus.removeAll()
+    if (isEmpty(s.newValue)) {
+      return
+    }
     forEach(s.newValue, (template: Template) => {
       const { name, content } = template
       chrome.contextMenus.create({
